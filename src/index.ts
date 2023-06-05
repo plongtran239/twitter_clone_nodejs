@@ -1,7 +1,17 @@
-type Hanlde = () => Promise<string>
+import express from 'express'
 
-const fullname = 'Trần Phước Long'
+// Route handlers
+import usersRouter from './routes/users.routes'
 
-const handleClick: Hanlde = () => Promise.resolve(fullname)
+const PORT = 4000
 
-handleClick().then(console.log)
+const app = express()
+
+// convert inputs to json
+app.use(express.json())
+
+app.use('/users', usersRouter)
+
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`)
+})
