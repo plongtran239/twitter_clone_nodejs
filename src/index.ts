@@ -3,6 +3,9 @@ import express, { NextFunction, Request, Response } from 'express'
 // Route handlers
 import usersRouter from './routes/users.routes'
 
+// Middlewares
+import defaultErrorHandler from './middlewares/error.middlewares'
+
 // Services
 import databaseService from './services/database.services'
 
@@ -17,10 +20,7 @@ app.use('/users', usersRouter)
 
 databaseService.connect().catch(console.dir)
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log('Error', err)
-  res.status(400).json({ error: err.message })
-})
+app.use(defaultErrorHandler)
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)

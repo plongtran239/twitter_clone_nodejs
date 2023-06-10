@@ -1,5 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import { checkSchema } from 'express-validator'
+
+// Models
+import { ErrorWithStatus } from '~/models/Errors'
+
+// Services
 import usersService from '~/services/users.services'
 
 // Utilities
